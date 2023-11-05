@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule } from '@angular/material/button';
+import { MatButton, MatButtonModule } from '@angular/material/button';
 import { MatCardModule} from '@angular/material/card';
 import { MatFormFieldModule} from '@angular/material/form-field';
 import { MatCheckboxModule} from '@angular/material/checkbox';
@@ -15,12 +15,26 @@ import { HomeComponent } from './home/home.component';
 import { FormsModule } from '@angular/forms';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { NavBarComponent } from './nav-bar/nav-bar.component';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { ExploreComponent } from './explore/explore.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
+import { jwtDecode } from 'jwt-decode';
+import { RandomRecipesComponent } from './explore/random-recipes/random-recipes.component';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { SearchBarComponent } from './home/search-bar/search-bar.component';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
     AppComponent,
     LandingPageComponent,
-    HomeComponent
+    HomeComponent,
+    NavBarComponent,
+    ExploreComponent,
+    UserProfileComponent,
+    RandomRecipesComponent,
+    SearchBarComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +48,13 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     HttpClientModule,
     FormsModule,
     MatSnackBarModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatGridListModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatIconModule,
 
   ],
   providers: [],

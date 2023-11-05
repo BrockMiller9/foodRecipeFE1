@@ -1,0 +1,36 @@
+.recipes-carousel {
+    display: flex;
+    overflow-x: auto;
+    scrollbar-width: none; /* For Firefox */
+    -ms-overflow-style: none;  /* For Internet Explorer and Edge */
+}
+
+/* For Chrome, Safari, and Opera */
+.recipes-carousel::-webkit-scrollbar {
+    display: none;
+}
+
+.recipe-card {
+    flex: 0 0 auto; /* Do not grow or shrink, but allow basis to be auto */
+    margin: 10px;
+    width: 250px; /* Adjust card width as needed */
+}
+
+.carousel-background {
+    background-color: black; /* Black background */
+    padding: 20px 0; /* Adjust as needed, top & bottom padding */
+    overflow: hidden; /* Ensures no overflow from inner carousel */
+  }
+
+  recipes-carousel::-webkit-scrollbar-track {
+    background: black; /* Color of the track */
+  }
+  
+  .recipes-carousel::-webkit-scrollbar-thumb {
+    background: #888; /* Color of the scrollbar thumb */
+    border-radius: 5px; /* Roundness of the scrollbar thumb */
+  }
+  
+  .recipes-carousel::-webkit-scrollbar-thumb:hover {
+    background: #555; /* Color when hovered */
+  }

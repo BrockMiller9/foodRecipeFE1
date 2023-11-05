@@ -1,1 +1,13 @@
-<p>home works!</p>
+ <app-search-bar *ngIf="showSearchBar"></app-search-bar> 
+
+<section *ngIf="!showSearchBar" class="bg-cover bg-center h-screen" style="background-image: url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&q=80&w=1170&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');">
+  <div class="flex items-center justify-center h-full w-full bg-gray-900 bg-opacity-50">
+    <div class="text-center">
+      <h1 class="text-white text-6xl font-semibold">Welcome to FoodFinder</h1>
+      <p class="text-white text-xl mt-4">Find the perfect recipe for every occasion.</p>
+      <button (click)="onExploreRecipesClick()"  class="mt-8 px-6 py-3 bg-blue-500 text-white font-semibold rounded-md hover:bg-blue-600">
+        Explore
+      </button>
+    </div>
+  </div>
+</section>

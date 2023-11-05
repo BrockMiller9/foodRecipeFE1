@@ -1,0 +1,82 @@
+<!-- 
+<mat-card class="search-card">
+    <h2 class="catchy-phrase">Whip up a feast with what's on hand!</h2>
+  <p class="subtext">Tell us what's in your pantry and we'll conjure up some delicious recipes for you.</p>
+    <div class="search-container">
+      <input
+        type="text"
+        class="search-input"
+        placeholder="Enter ingredients..."
+        [(ngModel)]="searchQuery"
+        (keyup.enter)="onSearch()"
+      />
+      <button class="search-button" (click)="onSearch()">
+        <mat-icon>search</mat-icon>
+      </button>
+    </div>
+  </mat-card> -->
+
+  <!-- Below your search bar component -->
+  <!-- <div *ngIf="isLoading" class="loading">Loading...</div>
+  <div *ngIf="!isLoading && searchResults.length > 0">
+    <h3>Found Recipes:</h3>
+    <div *ngFor="let recipe of searchResults">
+      <p>{{ recipe.title }}</p>
+      <img [src]="recipe.image" alt="{{ recipe.title }}" /> -->
+      <!-- Add other details you want to display -->
+    <!-- </div>
+  </div> -->
+  
+  <div class="max-w-md mx-auto my-10 p-6 bg-white shadow-md rounded-lg">
+    <h2 class="text-2xl font-bold text-center text-gray-800 mb-4">Whip up a feast with what's on hand!</h2>
+    <p class="text-gray-600 text-center mb-6">Tell us what's in your pantry and we'll conjure up some delicious recipes for you.</p>
+    <div class="flex items-center border border-gray-300 rounded-lg overflow-hidden">
+      <input
+        type="text"
+        class="flex-1 p-4 text-gray-700 focus:outline-none"
+        placeholder="Enter ingredients..."
+        [(ngModel)]="searchQuery"
+        (keyup.enter)="onSearch()"
+      />
+      <button class="flex items-center justify-center px-4 border-l bg-blue-500 text-white" (click)="onSearch()">
+        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50" height="50" viewBox="0 0 50 50">
+          <path d="M 21 4 C 11.082241 4 3 12.082241 3 22 C 3 31.917759 11.082241 40 21 40 C 24.62177 40 27.99231 38.91393 30.820312 37.0625 L 43.378906 49.621094 L 47.621094 45.378906 L 35.224609 32.982422 C 37.581469 29.938384 39 26.13473 39 22 C 39 12.082241 30.917759 4 21 4 z M 21 8 C 28.756241 8 35 14.243759 35 22 C 35 29.756241 28.756241 36 21 36 C 13.243759 36 7 29.756241 7 22 C 7 14.243759 13.243759 8 21 8 z"></path>
+          </svg>      </button>
+    </div>
+  </div>
+
+  <!-- Loading indicator -->
+  <div class="flex justify-center mt-5" *ngIf="isLoading">
+    <div class="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+
+  <!-- Search results -->
+<!-- Search results container -->
+<div class="mt-5 p-5 border border-gray-200 rounded-lg shadow-lg mx-auto" style="max-width: 75%;" *ngIf="!isLoading && searchResults.length > 0">
+  <h3 class="font-roboto text-2xl font-extrabold text-indigo-600 mb-5 text-center">
+    <span class="block bg-gradient-to-r from-blue-500 via-orange-500 to-yellow-500 bg-clip-text text-transparent">
+      Found Recipes
+    </span>
+  </h3>  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+    <!-- Cards -->
+    <div class="bg-white rounded-lg overflow-hidden" *ngFor="let recipe of searchResults">
+      <img class="w-full h-48 object-cover" [src]="recipe.image" alt="{{ recipe.title }}" />
+      <div class="p-4">
+        <h4 class="font-bold text-md text-gray-800 mb-2 truncate">{{ recipe.title }}</h4>
+        <!-- Details -->
+        <div class="flex justify-between items-center mt-4">
+         
+        </div>
+        <div class="mt-4">
+          <button class="px-4 py-2 bg-blue-500 text-white text-sm rounded hover:bg-blue-600 focus:outline-none focus:bg-blue-600" (click)="viewRecipe(recipe)">View Recipe</button>
+        </div>
+      </div>
+    </div>
+    <!-- End of Cards -->
+  </div>
+</div>
+<!-- End of Search results container -->
+
+
