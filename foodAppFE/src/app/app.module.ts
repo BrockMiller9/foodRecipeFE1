@@ -24,6 +24,8 @@ import { RandomRecipesComponent } from './explore/random-recipes/random-recipes.
 import { MatGridListModule } from '@angular/material/grid-list';
 import { SearchBarComponent } from './home/search-bar/search-bar.component';
 import { MatIconModule } from '@angular/material/icon';
+import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,9 @@ import { MatIconModule } from '@angular/material/icon';
     ExploreComponent,
     UserProfileComponent,
     RandomRecipesComponent,
-    SearchBarComponent
+    SearchBarComponent,
+    RecipeDetailComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -55,6 +59,7 @@ import { MatIconModule } from '@angular/material/icon';
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
+    FontAwesomeModule
 
   ],
   providers: [],

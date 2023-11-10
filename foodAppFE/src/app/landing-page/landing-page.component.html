@@ -23,7 +23,7 @@
   
     <mat-card-actions>
       <button mat-raised-button color="primary" (click)="onLogin()" [disabled]="isLoading">LOGIN</button>
-      <a href="#" class="create-account-link" (click)="showCreateAccount = true">Create Account</a>
+      <a href="#" class="create-account-link" (click)="showCreateAccount = true; $event.preventDefault()">Create Account</a>
     </mat-card-actions>
   
     <div class="forgot-password">
@@ -57,6 +57,6 @@
     </mat-card-actions>
   
     <div class="back-to-login">
-      <a href="#" (click)="showCreateAccount = false">Already have an account? Log in</a>
+      <a href="#" (click)="showCreateAccount = false; $event.preventDefault()">Already have an account? Log in</a>
     </div>
 </mat-card>

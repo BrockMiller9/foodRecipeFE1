@@ -8,6 +8,15 @@ import { Router } from '@angular/router';
   styleUrls: ['./nav-bar.component.css']
 })
 export class NavBarComponent {
+  navigation = [
+    { name: 'Home', href: '/home' },
+    { name: 'Explore', href: '/explore' },
+    { name: 'About', href: '#' },
+    { name: 'Company', href: '#' },
+  ];
+  
+  mobileMenuOpen = false;
+  
 
   isLoggedIn: boolean = true;
 

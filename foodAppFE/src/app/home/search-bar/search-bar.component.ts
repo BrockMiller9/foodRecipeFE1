@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { RecipeDto } from 'src/app/models/RecipeDto';
 import { RecipeService } from 'src/app/services/Recipe.service';
 
@@ -13,7 +14,7 @@ export class SearchBarComponent {
   isLoading = false;
   searchResults: RecipeDto[] = [];
 
-  constructor(private recipeService: RecipeService) {}
+  constructor(private recipeService: RecipeService, private router: Router) {}
 
   onSearch(): void {
     if (this.searchQuery.trim()) {
@@ -32,6 +33,11 @@ export class SearchBarComponent {
   }
 
   viewRecipe(recipe: RecipeDto): void {
-    console.log('Viewing recipe:', recipe);
+    this.recipeService.getRecipeInformation(recipe.id).subscribe(recipeInfo => {
+      // Navigate to the recipe detail component with the retrieved information
+      // You may choose to use a service to pass the data or navigate with query parameters
+      // For example, using Angular Router to navigate:
+      this.router.navigate(['/recipe-detail', recipe.id]);
+    });
   }
 }

@@ -1,13 +1,15 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { RecipeDto } from "../models/RecipeDto";
+import { RecipeDetailDto } from "../models/RecipeDetailDto";
 
 @Injectable({
     providedIn: 'root'
   })
   export class RecipeService {
-    private apiURL = 'https://localhost:7253/api/SpoonTacularAPI/';
+    //private apiURL = 'https://localhost:7253/api/SpoonTacularAPI/';
+    private apiURL = 'http://localhost:5113/api/SpoonTacularAPI/';
   
     constructor(private http: HttpClient) {}
   
@@ -22,5 +24,11 @@ import { RecipeDto } from "../models/RecipeDto";
       console.log(`${this.apiURL}findByIngredients`, { params }+ '&number=2');
       return this.http.get<RecipeDto[]>(`${this.apiURL}findByIngredients`, { params });
     }
+    getRecipeInformation(id: number, includeNutrition: boolean = false): Observable<RecipeDetailDto> {
+      return this.http.get<RecipeDetailDto>(`${this.apiURL}${id}`, {
+        params: new HttpParams().set('includeNutrition', String(includeNutrition))
+      });
+    }
+    
   }
   

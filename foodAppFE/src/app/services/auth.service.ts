@@ -9,7 +9,8 @@ import { BehaviorSubject, Observable, catchError, map, of } from 'rxjs';
 })
 export class AuthService {
 
-  private apiURL ='https://localhost:7253/Auth/';
+  //private apiURL ='https://localhost:7253/Auth/';
+  private apiURL ='http://localhost:5113/Auth/';
 
   constructor(private http: HttpClient) { }
 
