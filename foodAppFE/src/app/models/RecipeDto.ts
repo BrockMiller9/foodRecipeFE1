@@ -6,6 +6,7 @@ export interface RecipeDto {
     readyInMinutes: number;
     sourceUrl: string;
     SpoonacularSourceUrl: string;
+    spoonacularId : number;
     // ... any other properties you expect from the response
   }
   

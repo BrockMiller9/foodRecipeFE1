@@ -1,0 +1,30 @@
+.text-overlay {
+    /* High contrast text */
+    color: #ffffff; /* or another light color that contrasts with your dark background */
+    
+    /* Semi-transparent background */
+    background-color: rgba(0, 0, 0, 0.5); /* Adjust the alpha transparency as needed */
+    padding: 8px; /* Or as much as needed */
+    border-radius: 4px; /* Optional: for rounded corners on the background */
+    
+    /* Text shadow */
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+    
+    /* Font weight and size */
+    font-weight: bold;
+    font-size: 1.25em; /* Or whatever size is appropriate */
+    
+    /* Spacing */
+    line-height: 1.6;
+    letter-spacing: 0.05em;
+    
+    /* Backdrop filter for blur effect (optional) */
+    /* This property is not supported in all browsers */
+    backdrop-filter: blur(5px);
+}
+
+.explore-container {
+    display: flex;
+  }
+  /* Other styles */
+  

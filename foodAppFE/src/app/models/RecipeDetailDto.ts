@@ -30,10 +30,21 @@ export interface RecipeDetailDto {
     vegetarian: boolean;
     extendedIngredients: ExtendedIngredient[];
     summary: string;
+    analyzedInstructions: AnalyzedInstruction[];
 }
 
 export interface Measures {
     amount: number;
     unitShort: string;
     unitLong: string;
+}
+
+export interface AnalyzedInstruction{
+    name: string;
+    steps: Steps[];
+}
+
+export interface Steps{
+    number: number;
+    step: string;
 }

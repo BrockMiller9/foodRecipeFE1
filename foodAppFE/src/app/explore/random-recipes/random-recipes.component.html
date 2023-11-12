@@ -1,4 +1,4 @@
-<div class="carousel-background">
+<!-- <div class="carousel-background">
 <div class="recipes-carousel">
     <ng-container *ngFor="let recipe of randomRecipes">
     <mat-card *ngIf="recipe.image" class="recipe-card">
@@ -17,4 +17,44 @@
     </mat-card>
 </ng-container>
 </div>
-</div>
+</div> -->
+
+<!-- Carousel wrapper -->
+<div class="relative w-full" data-carousel="slide">
+    <!-- Carousel items -->
+    <div class="carousel-inner relative w-full overflow-hidden">
+      <!-- Single carousel item -->
+      <ng-container *ngFor="let recipe of randomRecipes; let i = index" data-carousel-item>
+        <div *ngIf="recipe.image" class="recipe-card block duration-700 ease-in-out flex-shrink-0" [class.hidden]="i !== activeSlideIndex">
+          <mat-card class="relative block h-56 overflow-hidden rounded-lg md:h-96 w-full">
+            <img mat-card-image [src]="recipe.image" alt="{{ recipe.title }}" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
+            <mat-card-content class="absolute bottom-0 left-0 w-full bg-white bg-opacity-75 p-4">
+              <h2 class="text-lg font-bold">{{ recipe.title | slice:0:16 }}{{ recipe.title.length > 16 ? '...' : '' }}</h2>
+              <p class="text-sm">Ready in: {{ recipe.readyInMinutes }} minutes</p>
+              <p class="text-sm">Servings: {{ recipe.servings }}</p>
+              <button mat-button (click)="viewRecipe(recipe)" class="mt-2">View Recipe</button>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </ng-container>
+    </div>
+    <!-- Slider controls -->
+ <!-- Slider controls -->
+<button type="button" class="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" (click)="previousSlide()"  title="Next slide">
+    <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/80 text-gray-800">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+        </svg>
+    </span>
+</button>
+<button type="button" class="absolute top-0 right-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none border-2 border-red-500" (click)="nextSlide()"  title="Next slide">
+    <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/80 text-gray-800">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+        </svg>
+    </span>
+</button>
+
+
+  </div>
+  

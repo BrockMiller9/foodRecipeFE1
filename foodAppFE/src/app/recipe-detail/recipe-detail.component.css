@@ -1,0 +1,45 @@
+.div {
+    margin: 0 auto;
+    width: 50%;
+    height: 50%;
+    /* border: 3px solid rgb(177, 176, 185); */
+    padding: 10px;
+    background-color: rgb(238 242 255 / var(--tw-bg-opacity));
+}
+
+h2{
+    font-family: monospace;
+    font-size: 2rem;
+}
+
+.prep h2 {
+    position: relative;
+    display: inline-block; /* This will shrink the container to the size of the content */
+  }
+  
+  .prep h2:after {
+    content: '';
+    display: block;
+    width: 50%; /* This sets the pseudo-element to half the width of the h2 */
+    height: 4px; /* This should match the height of your border */
+    background-color: #6366f1; /* This should match the color of your border */
+    position: absolute;
+    bottom: 0;
+    left: 0;
+  }
+
+  .prep {
+    position: relative;
+  }
+  
+  .prep:after {
+    content: '';
+    display: block;
+    height: 50%; /* Full height of the parent */
+    width: 4px; /* Thickness of the border */
+    background-color: #6366f1; /* Color of the border */
+    position: absolute;
+    top: 0;
+    right: 0; /* Align to the right side */
+  }
+  

@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, catchError, map, of } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, map, of, tap, throwError } from 'rxjs';
 
 
 
@@ -9,21 +9,65 @@ import { BehaviorSubject, Observable, catchError, map, of } from 'rxjs';
 })
 export class AuthService {
 
+  private currentUserSubject = new BehaviorSubject<any>(null);
+  user$ = this.currentUserSubject.asObservable(); // This will allow components to subscribe to user changes
+  private authStatusListener = new BehaviorSubject<boolean>(this.hasToken());
+
   //private apiURL ='https://localhost:7253/Auth/';
   private apiURL ='http://localhost:5113/Auth/';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { 
+    this.loadUserFromLocalStorage(); // Call this function when the service is initialized
+
+  }
+
+  ngOnInit() {
+    this.loadUserFromLocalStorage(); // Call this function when the service is initialized
+  }
+  
+  private loadUserFromLocalStorage() {
+    const userData = localStorage.getItem('currentUser');
+    if (userData) {
+      const user = JSON.parse(userData);
+      this.currentUserSubject.next(user);
+    }
+  }
 
   login(userData: any): Observable<any> {
-    return this.http.post<any>(this.apiURL + 'login', userData);
+    return this.http.post<any>(`${this.apiURL}login`, userData).pipe(
+      tap(response => {
+        if (response && response.token) {
+          this.setUser(response); // Set user data with the response received
+          localStorage.setItem('token', response.token);
+          this.authStatusListener.next(true);
+        }
+      }),
+      catchError(error => throwError(() => error))
+    );
+  }
+
+  public setUser(response: any) {
+    // Assuming the response contains the user data and token
+    const user = { username: response.username, token: response.token };
+    localStorage.setItem('currentUser', JSON.stringify(user)); // Save the user info in localStorage
+    this.currentUserSubject.next(user); // Update the current user BehaviorSubject
+  }
+
+  clearUser() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('currentUser');
+    this.currentUserSubject.next(null);
+    this.authStatusListener.next(false);
+  }
+
+  
+  getCurrentUser(): Observable<any> {
+    return this.currentUserSubject.asObservable();
   }
 
   createAccount(newUser: any): Observable<any> {
     return this.http.post<any>(this.apiURL + 'register', newUser);
   }
-  private authStatusListener = new BehaviorSubject<boolean>(this.hasToken());
-
-  // ... other methods ...
 
   private hasToken(): boolean {
     return !!localStorage.getItem('token');
@@ -34,10 +78,7 @@ export class AuthService {
   }
 
   logout(): void {
-    localStorage.removeItem('token');
-    // If you have any other cleanup to do, do it here
-    // For example, clear any stored user data, etc.
-    this.authStatusListener.next(false);
+    this.clearUser(); // Clear the current user information
   }
 
   public isLoggedIn(): Observable<boolean> {
@@ -50,7 +91,6 @@ export class AuthService {
     return this.http.get<any>(`${this.apiURL}verify-token`, { headers }).pipe(
       map(response => {
         // Check the isValid property in the response
-        console.log(response);
         this.authStatusListener.next(true);
         return response.isValid; // Or response["isValid"] if you prefer
       }),

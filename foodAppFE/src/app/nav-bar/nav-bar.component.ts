@@ -11,12 +11,11 @@ export class NavBarComponent {
   navigation = [
     { name: 'Home', href: '/home' },
     { name: 'Explore', href: '/explore' },
-    { name: 'About', href: '#' },
-    { name: 'Company', href: '#' },
   ];
   
+  userName: string = '';
   mobileMenuOpen = false;
-  
+  searchQuery: string = '';
 
   isLoggedIn: boolean = true;
 
@@ -26,10 +25,23 @@ export class NavBarComponent {
     });
   }
 
+  ngOnInit(): void {
+    this.authService.getCurrentUser().subscribe(user => {
+      this.userName = user ? user.username : 'Guest'; // Use 'Guest' or any other default name
+      console.log(this.userName);
+    });
+  }
+  
+
   logout(): void {
     this.authService.logout();
     this.router.navigate(['/landing']);
     this.isLoggedIn = false; // Update the state
+  }
+  onSearch(): void {
+    if (this.searchQuery) {
+      this.router.navigate(['/search'], { queryParams: { query: this.searchQuery } });
+    }
   }
 
 }

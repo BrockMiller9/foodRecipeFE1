@@ -1,55 +1,120 @@
 <div class="bg-white" *ngIf="recipeDetail$ | async as recipeDetailDto">
-    <!-- Hero Section -->
-    <div class="pt-6 sm:pt-10 lg:pt-16 bg-indigo-50">
-      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between">
-          <!-- Image container -->
-          <div class="flex-shrink-0 mb-4 lg:mb-0 lg:w-1/2 lg:pr-4">
-            <img class="rounded-lg shadow-lg h-48 w-full object-cover lg:h-auto" [src]="recipeDetailDto.image" alt="{{ recipeDetailDto.title }}">
+  <!-- Hero Section -->
+  <div class="pt-6 sm:pt-10 lg:pt-16 bg-indigo-50">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between">
+        <!-- Image container -->
+        <div class="flex-shrink-0 mb-4 lg:mb-0 lg:w-1/2 lg:pr-4">
+          <img
+            class="rounded-lg shadow-lg h-48 w-full object-cover lg:h-auto"
+            [src]="recipeDetailDto.image"
+            alt="{{ recipeDetailDto.title }}"
+          />
+        </div>
+
+        <!-- Details container -->
+        <div class="lg:w-1/2">
+          <h2 class="text-3xl font-bold text-gray-900">
+            {{ recipeDetailDto.title }}
+          </h2>
+          <div class="mt-4">
+            <span class="text-lg text-gray-600"
+              >{{ recipeDetailDto.servings }} servings</span
+            >
+            <span class="ml-4 text-lg text-gray-600"
+              >{{ recipeDetailDto.readyInMinutes }} minutes</span
+            >
+            <span class="ml-4 text-lg text-gray-600"
+              >Health Score: {{ recipeDetailDto.healthScore }}</span
+            >
           </div>
-          
-          <!-- Details container -->
-          <div class="lg:w-1/2">
-            <h1 class="text-3xl font-bold text-gray-900">{{ recipeDetailDto.title }}</h1>
-            <div class="mt-4">
-              <span class="text-lg text-gray-600">{{ recipeDetailDto.servings }} servings</span>
-              <span class="ml-4 text-lg text-gray-600">{{ recipeDetailDto.readyInMinutes }} minutes</span>
-              <span class="ml-4 text-lg text-gray-600">Health Score: {{ recipeDetailDto.healthScore }}</span>
-            </div>
-            <p class="mt-2 text-sm text-gray-500">Price per serving: ${{ recipeDetailDto.pricePerServing.toFixed(2) }}</p>
-            <!-- Dietary Tags -->
-            <div class="mt-4">
-              <!-- Implement dietary tags based on the boolean properties -->
-            </div>
+          <p class="mt-2 text-sm text-gray-500">
+            Price per serving: ${{ recipeDetailDto.pricePerServing.toFixed(2) }}
+          </p>
+          <button (click)="toggleFavorite(recipeDetailDto)" class="mt-2 flex items-center hover:text-yellow-600 focus:outline-none focus:ring focus:border-yellow-300">
+            <i class="fas fa-star fa-2x" [ngClass]="{'text-yellow-500': isFavorite, 'text-gray-300': !isFavorite}"></i>
+            <span class="ml-2">{{ isFavorite ? 'You favorited this recipe' : 'Add to Favorites' }}</span>
+          </button>
+          <!-- Dietary Tags -->
+          <div class="mt-4">
+            <!-- Implement dietary tags based on the boolean properties -->
           </div>
         </div>
       </div>
     </div>
-  
-    <!-- Ingredients Section -->
-    <div class="mt-6 px-4 sm:mt-10 sm:px-6 md:px-8">
-      <h2 class="text-xl font-semibold">Ingredients</h2>
-      <ul class="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
-        <li *ngFor="let ingredient of recipeDetailDto.extendedIngredients" class="flex space-x-4 items-center">
-          <img [src]="getImageUrl(ingredient.image)" alt="{{ ingredient.name }}" class="h-12 w-12 object-cover rounded-full"> <!-- Rounded thumbnails -->
-          <div class="flex-auto">
-            <h3 class="capitalize font-semibold">{{ ingredient.nameClean }}</h3>
-            <p class="text-gray-500 capitalize">{{ ingredient.amount }} {{ ingredient.measures.unitShort }}</p>
-          </div>
-        </li>
-      </ul>
-          
-    </div>
-  
-    <!-- Preparation Section -->
-    <div class="mt-6 px-4 sm:mt-10 sm:px-6 md:px-8">
-      <h2 class="text-xl font-semibold">Preparation</h2>
-      <div class="prose mt-4" [innerHTML]="recipeDetailDto.summary"></div>
-    </div>
-  
-    <!-- Additional Details -->
-    <div class="mt-6 px-4 sm:mt-10 sm:px-6 md:px-8">
-      <a href="{{ recipeDetailDto.sourceUrl }}" class="text-indigo-600 hover:underline">View full recipe</a>
+  </div>
+
+  <!-- Ingredients and Preparation/Steps Section -->
+  <div class="mt-6 px-4 sm:mt-10 sm:px-6 md:px-8">
+    <div class="flex flex-col md:flex-row gap-8">
+      <!-- Ingredients Section -->
+
+      <div class="lg:w-1/2 prep">
+        <h2 class="text-xl font-semibold border-b-4 pb-2 border-indigo-500/100">
+          Ingredients
+        </h2>
+        <ul class="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
+          <li
+            *ngFor="let ingredient of recipeDetailDto.extendedIngredients"
+            class="flex space-x-4 items-center"
+          >
+            <img
+              [src]="getImageUrl(ingredient.image)"
+              alt="{{ ingredient.name }}"
+              class="h-12 w-12 object-cover rounded-full"
+            />
+            <div class="flex-auto">
+              <h3 class="capitalize font-semibold">
+                {{ ingredient.nameClean }}
+              </h3>
+              <p class="text-gray-500 capitalize">
+                {{ ingredient.amount }} {{ ingredient.measures.unitShort }}
+              </p>
+            </div>
+          </li>
+        </ul>
+
+        <!-- prepare -->
+        <div class="prep">
+          <h2
+            class="text-xl font-semibold border-b-4 pb-2 border-indigo-500/100"
+          >
+            Preparation
+          </h2>
+          <div class="prose mt-4" [innerHTML]="recipeDetailDto.summary"></div>
+        </div>
+      </div>
+
+      <!-- Steps Section -->
+      <div
+        class="lg:w-1/2 bg-white p-4 shadow rounded-lg div prep"
+        *ngIf="recipeDetailDto.analyzedInstructions.length > 0"
+      >
+        <h2 class="text-xl font-semibold border-b-4 pb-2 border-indigo-500/100">
+          Instructions
+        </h2>
+        <ul class="mt-4 space-y-2">
+          <li
+            *ngFor="
+              let step of recipeDetailDto.analyzedInstructions[0].steps;
+              let i = index
+            "
+            class="mt-2"
+          >
+            <span class="font-bold text-indigo-600">Step {{ i + 1 }}:</span>
+            <p class="mt-1">{{ step.step }}</p>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
-  
+
+  <!-- Additional Details -->
+  <div class="mt-6 px-4 sm:mt-10 sm:px-6 md:px-8">
+    <a
+      href="{{ recipeDetailDto.sourceUrl }}"
+      class="text-indigo-600 hover:underline"
+      >View full recipe</a
+    >
+  </div>
+</div>

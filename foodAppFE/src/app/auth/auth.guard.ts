@@ -16,7 +16,6 @@ export class AuthGuard implements CanActivate {
     return this.authService.isLoggedIn().pipe(
       take(1), // Take 1 to complete the observable immediately
       map(isLoggedIn => {
-        console.log(isLoggedIn);
         if (!isLoggedIn) {
           // Redirect to landing page if not logged in
           return this.router.createUrlTree(['/landing']);

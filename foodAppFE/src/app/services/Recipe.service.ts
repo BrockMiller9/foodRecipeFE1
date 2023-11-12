@@ -1,8 +1,10 @@
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
+import { Observable, catchError, map, tap, throwError } from "rxjs";
 import { RecipeDto } from "../models/RecipeDto";
 import { RecipeDetailDto } from "../models/RecipeDetailDto";
+import { RecipeSearchResultsDTO } from "../models/RecipeSearchResulstDTO";
+import { RecipeSearchResultDTO } from "../models/RecipeSearchResultDTO";
 
 @Injectable({
     providedIn: 'root'
@@ -29,6 +31,14 @@ import { RecipeDetailDto } from "../models/RecipeDetailDto";
         params: new HttpParams().set('includeNutrition', String(includeNutrition))
       });
     }
+    searchRecipes(query: string, number: number = 12): Observable<RecipeSearchResultDTO[]> {
+      return this.http.get<RecipeSearchResultDTO[]>(`${this.apiURL}search`, {
+        params: new HttpParams()
+          .set('query', query)
+          .set('number', number.toString())
+      });
+    }
+    
     
   }
   

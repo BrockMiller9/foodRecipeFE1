@@ -18,7 +18,6 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { ExploreComponent } from './explore/explore.component';
-import { UserProfileComponent } from './user-profile/user-profile.component';
 import { jwtDecode } from 'jwt-decode';
 import { RandomRecipesComponent } from './explore/random-recipes/random-recipes.component';
 import { MatGridListModule } from '@angular/material/grid-list';
@@ -26,6 +25,9 @@ import { SearchBarComponent } from './home/search-bar/search-bar.component';
 import { MatIconModule } from '@angular/material/icon';
 import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { SearchResultsComponent } from './search-results/search-results.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     RandomRecipesComponent,
     SearchBarComponent,
     RecipeDetailComponent,
-
+    SearchResultsComponent,
+    SidebarComponent,
   ],
   imports: [
     BrowserModule,
@@ -59,7 +62,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    FormsModule,
 
   ],
   providers: [],

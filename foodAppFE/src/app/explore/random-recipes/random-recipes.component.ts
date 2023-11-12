@@ -8,6 +8,7 @@ import { RecipeService } from 'src/app/services/Recipe.service';
   styleUrls: ['./random-recipes.component.css']
 })
 export class RandomRecipesComponent {
+  activeSlideIndex: number = 0;
   randomRecipes: RecipeDto[] = [];
   @ViewChild('carousel') private carousel!: ElementRef;
 
@@ -29,6 +30,15 @@ export class RandomRecipesComponent {
 
   viewRecipe(recipe: RecipeDto): void {
     console.log(recipe);
+  }
+
+  
+  nextSlide(): void {
+    this.activeSlideIndex = (this.activeSlideIndex + 1) % this.randomRecipes.length;
+  }
+
+  previousSlide(): void {
+    this.activeSlideIndex = (this.activeSlideIndex - 1 + this.randomRecipes.length) % this.randomRecipes.length;
   }
 
 }

@@ -1,0 +1,31 @@
+<!-- Static sidebar for desktop -->
+<div class="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col">
+    <!-- Sidebar content here -->
+    <div class="flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 bg-white px-6">
+      <div class="flex h-16 shrink-0 items-center">
+        <!-- Your logo here -->
+        <img class="h-16 w-auto pt-2" src="../../assets/foodAppLogo.png" alt="Your Company" />
+      </div>
+      <nav class="flex flex-1 flex-col">
+        <ul role="list" class="flex flex-1 flex-col gap-y-7">
+          <!-- Dynamic list items will be rendered here -->
+          <li *ngFor="let item of navigation">
+            <a (click)="selectCategory(item.value)" href="javascript:void(0)"
+            [class.bg-gray-50]="item.value === currentCategory"
+            [class.text-indigo-600]="item.value === currentCategory"
+            [class.text-gray-700]="item.value !== currentCategory"
+            [class.hover:text-indigo-600]="item.value !== currentCategory"
+            [class.hover:bg-gray-50]="item.value !== currentCategory"
+            class="group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
+           <!-- Icon component will be determined by item.icon -->
+          
+            
+              {{ item.name }}
+            </a>
+          </li>
+          <!-- ... Other list items here -->
+        </ul>
+      </nav>
+    </div>
+  </div>
+  

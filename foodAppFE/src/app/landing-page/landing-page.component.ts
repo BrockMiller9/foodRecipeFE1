@@ -66,14 +66,17 @@ export class LandingPageComponent {
       email: this.email,
       password: this.newPassword
     };
-
+  
+    console.log(newUser);
+  
     this.authService.createAccount(newUser).subscribe(
       (response) => {
         this.isLoading = false;
-        // Handle successful account creation, maybe redirect to login or home
-        console.log(response);
-        localStorage.setItem('token', response.token);
-        this.router.navigate(['/home']);
+        // If your backend returns the user and token on registration, use them to set the user
+        if (response && response.token) {
+          this.authService.setUser(response); // Update the current user and token
+          this.router.navigate(['/home']);
+        }
       },
       (error) => {
         this.isLoading = false;
@@ -82,6 +85,10 @@ export class LandingPageComponent {
         this.snackBar.open('Account creation failed. Please try again.', 'Close');
       }
     );
-}
+  }
 
+signInWithTestAccount(): void {
+  this.username = 'testUser';
+  this.password = 'test123456';
+  this.onLogin();}
 }
