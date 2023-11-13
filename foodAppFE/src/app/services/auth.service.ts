@@ -67,7 +67,12 @@ export class AuthService {
   }
 
   createAccount(newUser: any): Observable<any> {
-    return this.http.post<any>(this.apiURL + 'register', newUser);
+    return this.http.post<any>(this.apiURL + 'register', newUser).pipe(
+      catchError((error) => {
+        // You can process the error response here if needed
+        return throwError(error);
+      })
+    );
   }
 
   private hasToken(): boolean {

@@ -19,7 +19,7 @@ export class LandingPageComponent {
   showCreateAccount: boolean = false;
 
   isLoading: boolean = false;
-
+  serverErrors: any[] = [];
 
   constructor(private authService: AuthService, private router: Router, private snackBar: MatSnackBar) { }
 
@@ -60,6 +60,7 @@ export class LandingPageComponent {
   }
 
   onCreateAccount(): void {
+    this.serverErrors = [];
     this.isLoading = true;
     const newUser = {
       username: this.newUsername,
@@ -67,22 +68,23 @@ export class LandingPageComponent {
       password: this.newPassword
     };
   
-    console.log(newUser);
-  
     this.authService.createAccount(newUser).subscribe(
       (response) => {
         this.isLoading = false;
-        // If your backend returns the user and token on registration, use them to set the user
         if (response && response.token) {
-          this.authService.setUser(response); // Update the current user and token
+          this.authService.setUser(response);
           this.router.navigate(['/home']);
         }
       },
       (error) => {
         this.isLoading = false;
-        // Handle errors during account creation
-        console.log(error);
-        this.snackBar.open('Account creation failed. Please try again.', 'Close');
+        if (error.error && error.error.errors) {
+          // Flatten the server errors into an array
+          this.serverErrors = Object.values(error.error.errors).flat();
+        } else {
+          this.snackBar.open('Account creation failed. Please try again.', 'Close');
+        }
+        console.error('Registration error:', error);
       }
     );
   }
