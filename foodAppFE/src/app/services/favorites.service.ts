@@ -6,7 +6,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class FavoritesService {
-  private apiURL = 'http://localhost:5113/api/Favorites/';
+  //private apiURL = 'http://localhost:5113/api/Favorites/';
+  private apiURL = 'https://foodservicebackend.onrender.com/api/Favorites/';
   
   constructor(private http: HttpClient) {}
 

@@ -11,7 +11,8 @@ import { RecipeSearchResultDTO } from "../models/RecipeSearchResultDTO";
   })
   export class RecipeService {
     //private apiURL = 'https://localhost:7253/api/SpoonTacularAPI/';
-    private apiURL = 'http://localhost:5113/api/SpoonTacularAPI/';
+    //private apiURL = 'http://localhost:5113/api/SpoonTacularAPI/';
+    private apiURL = 'https://foodservicebackend.onrender.com/api/SpoonTacularAPI/';
   
     constructor(private http: HttpClient) {}
   

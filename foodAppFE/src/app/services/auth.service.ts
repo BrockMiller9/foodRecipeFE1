@@ -14,7 +14,8 @@ export class AuthService {
   private authStatusListener = new BehaviorSubject<boolean>(this.hasToken());
 
   //private apiURL ='https://localhost:7253/Auth/';
-  private apiURL ='http://localhost:5113/Auth/';
+  //private apiURL ='http://localhost:5113/Auth/';
+  private apiURL ='https://foodservicebackend.onrender.com/Auth/';
 
   constructor(private http: HttpClient) { 
     this.loadUserFromLocalStorage(); // Call this function when the service is initialized
