@@ -60,8 +60,8 @@ export class LandingPageComponent {
   }
 
   onCreateAccount(): void {
-    this.serverErrors = [];
     this.isLoading = true;
+    this.serverErrors = []; // Clear previous errors
     const newUser = {
       username: this.newUsername,
       email: this.email,
@@ -72,22 +72,27 @@ export class LandingPageComponent {
       (response) => {
         this.isLoading = false;
         if (response && response.token) {
-          this.authService.setUser(response);
+          this.authService.setUser(response); // Update the current user and token
           this.router.navigate(['/home']);
         }
       },
       (error) => {
         this.isLoading = false;
-        if (error.error && error.error.errors) {
-          // Flatten the server errors into an array
+        // Check if the error is a simple string
+        if (typeof error.error === 'string') {
+          this.serverErrors.push(error.error);
+        } else if (error.error && error.error.errors) {
+          // If it's the object with 'errors', process as before
           this.serverErrors = Object.values(error.error.errors).flat();
         } else {
+          // Fallback error message
           this.snackBar.open('Account creation failed. Please try again.', 'Close');
         }
         console.error('Registration error:', error);
       }
     );
   }
+  
 
 signInWithTestAccount(): void {
   this.username = 'testUser';
