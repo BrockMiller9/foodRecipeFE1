@@ -208,10 +208,16 @@
           <div>
             <label for="new-password" class="block text-sm font-medium leading-6 text-gray-900">Password</label>
             <div class="mt-2">
-              <input id="new-password" [(ngModel)]="newPassword" name="newPassword" type="password" autocomplete="new-password" required
+              <input id="new-password" [(ngModel)]="newPassword" name="newPassword" type="password" autocomplete="new-password" required minlength="8"
+                #password="ngModel" 
                 class="block w-full rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+              <div *ngIf="password.errors && (password.dirty || password.touched)" class="text-red-600 text-sm mt-2">
+                <span *ngIf="password.errors['required']">Password is required.</span>
+                <span *ngIf="password.errors['minlength']">Password must be at least 8 characters long.</span>
+              </div>
             </div>
           </div>
+          
 
           <div>
             <button [disabled]="isLoading" type="submit" class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus:outline-none">Create Account</button>
