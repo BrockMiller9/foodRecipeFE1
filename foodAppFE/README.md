@@ -1,27 +1,41 @@
 # FoodAppFE
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.0.
+The site can be found live here at https://foodcreationist.onrender.com
 
-## Development server
+# Food Recipe Application
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+This project is a full-stack web application that allows users to find recipes based on ingredients they have, explore and search for recipes, and favorite the ones they like. The frontend is built with Angular, while the backend relies on .NET. The project integrates with the Spoonacular API for recipe data. Initially developed using MySQL for the database during development, it was transitioned to PostgreSQL for production. Docker was utilized for containerization, with the container image being pushed to Render for deployment.
 
-## Code scaffolding
+## Features
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- User Authentication
+- Ingredient-based Recipe Search
+- Recipe Exploration and Favoriting
+- Responsive Frontend Design
 
-## Build
+## Tech Stack
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+- **Frontend:** Angular
+- **Backend:** .NET
+- **API:** Spoonacular
+- **Database:** PostgreSQL (Originally MySQL)
+- **Deployment:** Render (Docker)
 
-## Running unit tests
+## Local Development Setup
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+To run this project locally, you'll need to install several dependencies and set up your environment.
 
-## Running end-to-end tests
+### Prerequisites
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+- Node.js (Angular CLI)
+- .NET SDK
+- PostgreSQL Server
+- Docker (for containerization)
 
-## Further help
+### Installation
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+1. Clone the repository:
+
+```bash
+git clone https://github.com/your-github-username/your-repo-name.git
+cd your-repo-name
