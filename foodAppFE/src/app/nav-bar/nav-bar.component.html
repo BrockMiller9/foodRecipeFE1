@@ -20,7 +20,7 @@
         </a>
       </div>
       <div class="hidden lg:flex lg:gap-x-12">
-        <a *ngFor="let item of navigation" routerLink="{{item.name}}" class="text-sm font-semibold leading-6 text-gray-900">{{ item.name }}</a>
+        <a *ngFor="let item of navigation" [routerLink]="item.href" class="text-sm font-semibold leading-6 text-gray-900">{{ item.name }}</a>
       </div>
          <!-- Search Bar - Added to desktop navigation -->
     <div class="flex justify-center px-2 lg:ml-6 lg:justify-start lg:flex-1">
